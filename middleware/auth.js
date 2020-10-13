@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     const user = jwt.verify(token, process.env.SECRET);
     req["user"] = user;
   } catch (error) {
-    console.log("Catch 1");
+    console.log("Catch 1", error);
   }
   return next();
 };

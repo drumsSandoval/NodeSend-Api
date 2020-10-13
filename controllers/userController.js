@@ -14,7 +14,7 @@ exports.createUser = async (req, res) => {
   if (user) {
     return res
       .status(409)
-      .json({ data: { errors: "El usuario ya esta registrado" } });
+      .json({ data: { msg: "El usuario ya esta registrado" } });
   }
   // create new user
 
@@ -27,9 +27,9 @@ exports.createUser = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      data: { errors: "Error en el servidor al guardar el usuario :( " },
+      data: { msg: "Error en el servidor al guardar el usuario :( " },
     });
   }
 
-  res.json({ data: { msn: "Usuario creado correctamente" } });
+  res.json({ data: { msg: "Usuario creado correctamente" } });
 };

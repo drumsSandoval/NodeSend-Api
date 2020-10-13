@@ -10,10 +10,10 @@ exports.createLink = async (req, res, next) => {
       .status(422)
       .json({ data: { errors: errors.array().map((err) => err.msg) } });
   }
-  const { originalName } = req.body;
+  const { originalName, name } = req.body;
   const link = new Link();
   link.url = shortid.generate();
-  link["name"] = shortid.generate();
+  link["name"] = name;
   link.originalName = originalName;
   if (req.user) {
     const { password, downloads } = req.body;
@@ -39,7 +39,7 @@ exports.getLink = async (req, res, next) => {
   const { url } = req.params;
   const link = await Link.findOne({ url });
   if (!link) {
-    res.status(404).json({ data: { errors: "Ese enlace no existe" } });
+    res.status(404).json({ data: { msg: "Ese enlace no existe" } });
     return next();
   }
   res.json({ data: { file: link.name } });
